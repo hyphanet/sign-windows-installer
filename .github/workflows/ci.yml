@@ -14,6 +14,20 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Download fred from the Github Release
+      uses: i3h/download-release-asset@v1.1.0
+      with:
+        owner: "hyphanet"
+        repo: "wininstaller-innosetup"
+        tag: "latest"
+        file: "freenet.jar"
+
+    - name: Download fred from the Github Release
+      uses: actions/download-artifact@v4
+      with:
+        repository: "hyphanet/wininstaller-innosetup"
+        github-token: ${{ secrets.GH_PAT }}
+
     # fred and scripts are subrepositories. They must be updated to match the release.
     - name: verify fred
       working-directory: ./scripts
@@ -23,55 +37,4 @@ jobs:
         echo -e "export fredDir=\"$HOME\,/fred\\nexport freenetExtPath=\"$HOME\"/freenet-ext.jar\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
         cp freenet.jar "${HOME}"/wininstaller-innosetup/freenet.jar
         ./verify-build --tag build01498 --online
-
-  build-innosetup:
-    runs-on: windows-latest
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-
-    - name: Download fred from the Github Release
-      uses: i3h/download-release-asset@v1.1.0
-      with:
-        owner: "hyphanet"
-        repo: "fred"
-        tag: "latest"
-        file: "wininstaller-innosetup/freenet.jar"
-
-    - name: Building the installer
-      working-directory: ./wininstaller-innosetup
-      shell: cmd
-      run: |
-        gradlew.bat unzip updateSetupFile
-        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "FreenetInstall_InnoSetup.iss"
-
-    - name: Upload the installer as an artifact
-      uses: actions/upload-artifact@v2
-      if: ${{ github.event_name != 'pull_request' }}
-      with:
-        path: "wininstaller-innosetup/Output/FreenetInstaller.exe"
-        name: wininstaller-innosetup
-
-
-
-#     - name: Sign the installer
-#       uses: nextgens/authenticode-sign-action@v1.0.1
-#       if: ${{ github.event_name != 'pull_request' }}
-#       with:
-#         certificate: '${{ secrets.CERTIFICATES }}'
-#         credentials: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
-#         key-uri: "projects/fpi-codesign/locations/europe-west3/keyRings/code-signing/cryptoKeys/certificate/cryptoKeyVersions/1"
-#         timestamp-url: 'http://timestamp.comodoca.com'
-#         description: 'Freenet Installer'
-#         description-url: 'https://freenetproject.org'
-#         folder: "Output"
-#         recursive: true
-# 
-#     - name: Verify the signature
-#       if: ${{ github.event_name != 'pull_request' }}
-#       run: call "%programfiles(x86)%/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" verify /v /pa "Output/FreenetInstaller.exe"
-#       shell: cmd
 
