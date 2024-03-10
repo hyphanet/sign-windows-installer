@@ -43,10 +43,10 @@ jobs:
 
     - name: Building the installer
       working-directory: ./wininstaller-innosetup
-      run: |
-        "gradlew.bat" "unzip" "updateSetupFile"
-        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "FreenetInstall_InnoSetup.iss"
       shell: cmd
+      run: |
+        gradlew.bat unzip updateSetupFile
+        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "FreenetInstall_InnoSetup.iss"
 
     - name: Upload the installer as an artifact
       uses: actions/upload-artifact@v2
