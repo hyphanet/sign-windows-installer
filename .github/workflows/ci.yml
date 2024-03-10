@@ -14,14 +14,6 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Download fred from the Github Release
-      uses: i3h/download-release-asset@v1.1.0
-      with:
-        owner: "hyphanet"
-        repo: "fred"
-        tag: "latest"
-        file: "freenet.jar"
-
     # fred and scripts are subrepositories. They must be updated to match the release.
     - name: verify fred
       working-directory: ./scripts
@@ -47,21 +39,12 @@ jobs:
         owner: "hyphanet"
         repo: "fred"
         tag: "latest"
-        file: "freenet.jar"
-
-    - uses: eskatos/gradle-command-action@v1
-      with:
-        arguments: unzip
-
-
-    - uses: eskatos/gradle-command-action@v1
-      with:
-        arguments: updateSetupFile
+        file: "wininstaller-innosetup/freenet.jar"
 
     - name: Building the installer
       working-directory: ./wininstaller-innosetup
       run: |
-        cd wininstaller-innosetup
+        ./gradlew unzip updateSetupFile
         "%programfiles(x86)%\Inno Setup 6\iscc.exe" "FreenetInstall_InnoSetup.iss"
       shell: cmd
 
@@ -69,7 +52,7 @@ jobs:
       uses: actions/upload-artifact@v2
       if: ${{ github.event_name != 'pull_request' }}
       with:
-        path: "Output/FreenetInstaller.exe"
+        path: "wininstaller-innosetup/Output/FreenetInstaller.exe"
         name: wininstaller-innosetup
 
 
