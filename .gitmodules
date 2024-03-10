@@ -1,0 +1,9 @@
+[submodule "fred"]
+	path = fred
+	url = ./fred
+[submodule "wininstaller-innosetup"]
+	path = wininstaller-innosetup
+	url = ./wininstaller-innosetup/
+[submodule "scripts"]
+	path = scripts
+	url = ./scripts/

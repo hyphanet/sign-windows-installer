@@ -1,0 +1,4 @@
+export fredDir=$HOME/fred
+export freenetExtPath=$HOME/freenet-ext.jar
+export fcpHost=127.0.0.1
+export fcpPort=9481
