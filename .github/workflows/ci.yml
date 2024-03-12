@@ -6,7 +6,7 @@ on:
 
 jobs:
   verify-fred:
-    runs-on: debian-oldstable
+    runs-on: debian-stable
 
     steps:
     - name: Checkout
