@@ -19,7 +19,7 @@ jobs:
     - name: verify fred
       shell: bash
       run: |
-        apt --installed list
+        apt --installed list | grep jdk
         sudo apt-get remove -y openjdk-11-jdk-headless
         sudo apt-get install python3 openjdk-8-jdk
         pip install pyFreenet3
