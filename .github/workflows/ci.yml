@@ -25,5 +25,6 @@ jobs:
         cp "$HOME"/Freenet/freenet.jar ./wininstaller-innosetup/freenet.jar
         sudo apt-get install python3
         pip install pyFreenet3
+        wget https://www.hyphanet.org/assets/keyring.gpg && gpg --import keyring.gpg
         cd ./scripts && bash -x ./verify-build --tag build01497 --online
 
