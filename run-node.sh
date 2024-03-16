@@ -5,6 +5,8 @@ wget http://ftp.lysator.liu.se/pub/freenet/fred-releases/build01497/new_installe
 SOURCE_DIR=${PWD}
 mkdir ~/Freenet
 cd ~/Freenet
+echo "${PWD}" | java -jar "${SOURCE_DIR}/freenet-installer.jar" -console
+./run.sh stop
 cat > freenet.ini <<EOF
 fproxy.hasCompletedWizard=true
 logger.priority=ERROR
@@ -28,5 +30,4 @@ node.load.subMaxPingTime=7000
 node.load.maxPingTime=15000
 End
 EOF
-echo "${PWD}" | java -jar "${SOURCE_DIR}/freenet-installer.jar" -console
-./run.sh status
+./run.sh start
