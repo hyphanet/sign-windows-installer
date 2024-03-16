@@ -6,7 +6,7 @@ on:
 
 jobs:
   verify-fred:
-    runs-on: debian-stable
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
