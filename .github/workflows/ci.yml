@@ -24,6 +24,6 @@ jobs:
         cat "$HOME"/.freenetrc
         cp "$HOME"/Freenet/freenet.jar ./wininstaller-innosetup/freenet.jar
         sudo apt-get install python3
-        pip --install pyFreenet3
+        pip install pyFreenet3
         cd ./scripts && ./verify-build --tag build01497 --online
 
