@@ -19,9 +19,8 @@ jobs:
     - name: verify fred
       shell: bash
       run: |
-        apt --installed list | grep jdk
-        sudo apt-get remove -y openjdk-11-jdk-headless
-        sudo apt-get install python3 openjdk-8-jdk
+        echo "remove too new Java"; sudo apt-get remove -y temurin-11-jdk temurin-17-jdk temurin-21-jdk
+        echo "install python and java 8"; sudo apt-get install python3 openjdk-8-jdk
         pip install pyFreenet3
         ./run-node.sh
         echo -e "export fredDir=\"$(realpath .)/fred\"\nexport freenetExtPath=\"$HOME/Freenet/freenet-ext.jar\"\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
