@@ -32,5 +32,4 @@ node.load.maxPingTime=15000
 End
 EOF
 ./run.sh restart
-sleep 10;
 ./run.sh status
