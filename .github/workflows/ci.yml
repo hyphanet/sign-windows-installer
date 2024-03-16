@@ -19,13 +19,13 @@ jobs:
     - name: verify fred
       shell: bash
       run: |
-        ./run-node.sh
-        echo -e "export fredDir=\"$(realpath .)/fred\"\nexport freenetExtPath=\"$HOME/Freenet/freenet-ext.jar\"\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
-        cat "$HOME"/.freenetrc
-        cp "$HOME"/Freenet/freenet.jar ./wininstaller-innosetup/freenet.jar
-        sudo apt-get remove -y openjdk-11-jdk
+        apt --installed list
+        sudo apt-get remove -y openjdk-11-jdk-headless
         sudo apt-get install python3 openjdk-8-jdk
         pip install pyFreenet3
+        ./run-node.sh
+        echo -e "export fredDir=\"$(realpath .)/fred\"\nexport freenetExtPath=\"$HOME/Freenet/freenet-ext.jar\"\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
+        cp "$HOME"/Freenet/freenet.jar ./wininstaller-innosetup/freenet.jar
         wget https://www.hyphanet.org/assets/keyring.gpg && gpg --import keyring.gpg
         cd ./scripts && bash -x ./verify-build --tag build01497 --online ; cd -
         ./stop-node.sh
