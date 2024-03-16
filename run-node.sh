@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # use the Lysator mirror, because github throttles us
 wget http://ftp.lysator.liu.se/pub/freenet/fred-releases/build01497/new_installer_offline_1497.jar \
   -O freenet-installer.jar
