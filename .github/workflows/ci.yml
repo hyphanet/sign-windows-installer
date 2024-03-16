@@ -19,15 +19,15 @@ jobs:
     - name: verify fred
       shell: bash
       run: |
-        echo "remove too new Java"; sudo apt-get remove -y temurin-11-jdk temurin-17-jdk temurin-21-jdk
-        echo "install python and java 8"; sudo apt-get install python3 temurin-8-jdk
-        echo "update JAVA_HOME environment variable"; source /etc/environment; source /etc/profile; export JAVA_HOME=/usr/lib/jvm/temurin-8-jdk-amd64
+        echo "install python"; sudo apt-get install python3
         pip install pyFreenet3
         bash -x ./run-node.sh
         echo -e "export fredDir=\"$(realpath .)/fred\"\nexport freenetExtPath=\"$HOME/Freenet/freenet-ext.jar\"\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
         cp "$HOME"/Freenet/freenet.jar ./wininstaller-innosetup/freenet.jar
         wget https://www.hyphanet.org/assets/keyring.gpg && gpg --import keyring.gpg
         cat ~/Freenet/wrapper.log
-        cd ./scripts && bash -x ./verify-build --tag build01497 --online ; cd -; ./stop-node.sh
+        echo "update JAVA_HOME environment variable"; source /etc/environment; source /etc/profile; export JAVA_HOME=/usr/lib/jvm/temurin-8-jdk-amd64
+        echo "install sdkman"; curl -s "https://get.sdkman.io" | bash
+        sdk install java 8.0.402-tem && cd ./scripts && bash -x ./verify-build --tag build01497 --online ; cd -; ./stop-node.sh
 
 
