@@ -1,9 +1,9 @@
 [submodule "fred"]
 	path = fred
-	url = ./fred
+	url = https://github.com/hyphanet/fred
 [submodule "wininstaller-innosetup"]
 	path = wininstaller-innosetup
-	url = ./wininstaller-innosetup/
+	url = https://github.com/hyphanet/wininstaller-innosetup
 [submodule "scripts"]
 	path = scripts
-	url = ./scripts/
+	url = https://github.com/hyphanet/scripts
