@@ -23,7 +23,7 @@ jobs:
         echo -e "export fredDir=\"$(realpath .)/fred\"\nexport freenetExtPath=\"$HOME/Freenet/freenet-ext.jar\"\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
         cat "$HOME"/.freenetrc
         cp "$HOME"/Freenet/freenet.jar ./wininstaller-innosetup/freenet.jar
-        sudo apt-get install python
+        sudo apt-get install python3
         pip --install pyFreenet3
         cd ./scripts && ./verify-build --tag build01497 --online
 
