@@ -16,7 +16,6 @@ jobs:
 
     # fred and scripts are subrepositories. They must be updated to match the release.
     - name: verify fred
-      working-directory: ./scripts
       shell: bash
       run: |
         find .
