@@ -23,7 +23,7 @@ jobs:
         echo -e "export fredDir=\"$(realpath .)/fred\"\nexport freenetExtPath=\"$HOME/Freenet/freenet-ext.jar\"\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
         cat "$HOME"/.freenetrc
         cp "$HOME"/Freenet/freenet.jar ./wininstaller-innosetup/freenet.jar
-        sudo apt-get uninstall openjdk-11-jdk
+        sudo apt-get remove -y openjdk-11-jdk
         sudo apt-get install python3 openjdk-8-jdk
         pip install pyFreenet3
         wget https://www.hyphanet.org/assets/keyring.gpg && gpg --import keyring.gpg
