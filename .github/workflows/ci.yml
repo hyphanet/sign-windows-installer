@@ -27,6 +27,10 @@ jobs:
         echo -e "export fredDir=\"$(realpath .)/fred\"\nexport freenetExtPath=\"$HOME/Freenet/freenet-ext.jar\"\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
         cp "$HOME"/Freenet/freenet.jar ./wininstaller-innosetup/freenet.jar
         wget https://www.hyphanet.org/assets/keyring.gpg && gpg --import keyring.gpg
-        cd ./scripts && bash -x ./verify-build --tag build01497 --online ; cd -; ./stop-node.sh
+        cd ./scripts && bash -x ./verify-build --tag build01497 --online ; cd -
+        ~/Freenet/run.sh status
+        ~/Freenet/run.sh restart
+        cat ~/Freenet/freenet.ini
+        ./stop-node.sh
 
 
