@@ -23,7 +23,7 @@ jobs:
         echo "install python and java 8"; sudo apt-get install python3 temurin-8-jdk
         echo "update JAVA_HOME environment variable"; source /etc/environment; source /etc/profile; export JAVA_HOME=/usr/lib/jvm/temurin-8-jdk-amd64
         pip install pyFreenet3
-        ./run-node.sh
+        bash -x ./run-node.sh
         echo -e "export fredDir=\"$(realpath .)/fred\"\nexport freenetExtPath=\"$HOME/Freenet/freenet-ext.jar\"\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
         cp "$HOME"/Freenet/freenet.jar ./wininstaller-innosetup/freenet.jar
         wget https://www.hyphanet.org/assets/keyring.gpg && gpg --import keyring.gpg
