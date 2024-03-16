@@ -16,7 +16,7 @@ jobs:
         submodules: recursive
 
     # fred and scripts are subrepositories. They must be updated to match the release.
-    - name: verify fred
+    - name: verify freenet.jar
       shell: bash
       run: |
         echo "install python"; sudo apt-get install python3
@@ -31,4 +31,22 @@ jobs:
         sdk install java 8.0.402-tem && cd ./scripts && ./verify-build --tag build01497 --online && cd -
         ./stop-node.sh
 
+    - name: prepare the windows installer
+      shell: bash
+      run: |
+        cd ./wininstaller-innosetup
+        wget -O freenet.jar https://github.com/freenet/fred/releases/download/build01497/freenet-build01497.jar"
+        ./gradlew unzip updateSetupFile
 
+    - name: build the windows installer
+      shell: cmd
+      run: |
+        cd ./wininstaller-innosetup
+        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "FreenetInstall_InnoSetup.iss"
+        
+    - name: Upload the windows installer as an artifact
+      uses: actions/upload-artifact@v2
+      if: ${{ github.event_name != 'pull_request' }}
+      with:
+        path: "wininstaller-innosetup/Output/FreenetInstaller.exe"
+        name: wininstaller-innosetup
