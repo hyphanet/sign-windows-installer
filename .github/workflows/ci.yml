@@ -14,20 +14,6 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Download fred from the Github Release
-      uses: i3h/download-release-asset@v1.1.0
-      with:
-        owner: "hyphanet"
-        repo: "wininstaller-innosetup"
-        tag: "latest"
-        file: "freenet.jar"
-
-    - name: Download fred from the Github Release
-      uses: actions/download-artifact@v4
-      with:
-        repository: "hyphanet/wininstaller-innosetup"
-        github-token: ${{ secrets.GH_PAT }}
-
     # fred and scripts are subrepositories. They must be updated to match the release.
     - name: verify fred
       working-directory: ./scripts
@@ -36,5 +22,5 @@ jobs:
         ./run-node.sh
         echo -e "export fredDir=\"$HOME\,/fred\\nexport freenetExtPath=\"$HOME\"/freenet-ext.jar\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
         cp freenet.jar "${HOME}"/wininstaller-innosetup/freenet.jar
-        ./verify-build --tag build01498 --online
+        ./verify-build --tag build01497 --online
 
