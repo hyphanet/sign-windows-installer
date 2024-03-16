@@ -35,7 +35,7 @@ jobs:
       shell: bash
       run: |
         cd ./wininstaller-innosetup
-        wget -O freenet.jar https://github.com/freenet/fred/releases/download/build01497/freenet-build01497.jar"
+        wget -O freenet.jar "https://github.com/freenet/fred/releases/download/build01497/freenet-build01497.jar"
         ./gradlew unzip updateSetupFile
 
     - name: build the windows installer
