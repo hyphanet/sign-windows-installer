@@ -31,11 +31,28 @@ jobs:
         sdk install java 8.0.402-tem && cd ./scripts && ./verify-build --tag build01497 --online && cd -
         ./stop-node.sh
 
+  windows-installer:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        submodules: recursive
+
+    - name: Checkout fred
+      uses: actions/checkout@v2
+      with:
+        repository: 'hyphanet/fred'
+        fetch-depth: 0
+        path: 'wininstaller-innosetup/fred'
+
+
     - name: prepare the windows installer
       shell: bash
       run: |
         cd ./wininstaller-innosetup
-        ln -s ../fred fred
         wget -O freenet.jar "https://github.com/freenet/fred/releases/download/build01497/freenet-build01497.jar"
         ./gradlew unzip updateSetupFile
 
