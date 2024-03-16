@@ -35,6 +35,7 @@ jobs:
       shell: bash
       run: |
         cd ./wininstaller-innosetup
+        ln -s ../fred fred
         wget -O freenet.jar "https://github.com/freenet/fred/releases/download/build01497/freenet-build01497.jar"
         ./gradlew unzip updateSetupFile
 
