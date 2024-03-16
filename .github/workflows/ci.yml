@@ -22,6 +22,6 @@ jobs:
         find .
         ./run-node.sh
         echo -e "export fredDir=\"$HOME\,/fred\\nexport freenetExtPath=\"$HOME\"/freenet-ext.jar\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
-        cp freenet.jar "${HOME}"/wininstaller-innosetup/freenet.jar
-        ./verify-build --tag build01497 --online
+        cp "$HOME"/Freenet/freenet.jar "${HOME}"/wininstaller-innosetup/freenet.jar
+        cd ./scripts && ./verify-build --tag build01497 --online
 
