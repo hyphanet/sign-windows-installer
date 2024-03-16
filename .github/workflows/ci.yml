@@ -21,14 +21,14 @@ jobs:
       run: |
         echo "install python"; sudo apt-get install python3
         pip install pyFreenet3
-        bash -x ./run-node.sh
+        ./run-node.sh
         echo -e "export fredDir=\"$(realpath .)/fred\"\nexport freenetExtPath=\"$HOME/Freenet/freenet-ext.jar\"\nexport fcpHost=127.0.0.1\nexport fcpPort=9481\n" > "$HOME"/.freenetrc
         cp "$HOME"/Freenet/freenet.jar ./wininstaller-innosetup/freenet.jar
         wget https://www.hyphanet.org/assets/keyring.gpg && gpg --import keyring.gpg
         cat ~/Freenet/wrapper.log
         echo "update JAVA_HOME environment variable"; source /etc/environment; source /etc/profile; export JAVA_HOME=/usr/lib/jvm/temurin-8-jdk-amd64
         echo "install sdkman"; curl -s "https://get.sdkman.io" | bash; source "/home/runner/.sdkman/bin/sdkman-init.sh"
-        sdk install java 8.0.402-tem && cd ./scripts && bash -x ./verify-build --tag build01497 --online
+        sdk install java 8.0.402-tem && cd ./scripts && ./verify-build --tag build01497 --online
         ./stop-node.sh
 
 
