@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
         submodules: recursive
@@ -36,13 +36,13 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
         submodules: recursive
 
     - name: Checkout fred
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: 'hyphanet/fred'
         fetch-depth: 0
@@ -63,7 +63,7 @@ jobs:
         "%programfiles(x86)%\Inno Setup 6\iscc.exe" "FreenetInstall_InnoSetup.iss"
         
     - name: Upload the windows installer as an artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "wininstaller-innosetup/Output/FreenetInstaller.exe"
