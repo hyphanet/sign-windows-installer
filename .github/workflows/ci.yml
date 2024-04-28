@@ -28,7 +28,7 @@ jobs:
         cat ~/Freenet/wrapper.log
         echo "update JAVA_HOME environment variable"; source /etc/environment; source /etc/profile; export JAVA_HOME=/usr/lib/jvm/temurin-8-jdk-amd64
         echo "install sdkman"; curl -s "https://get.sdkman.io" | bash; source "/home/runner/.sdkman/bin/sdkman-init.sh"
-        sdk install java 8.0.402-tem && cd ./scripts && ./verify-build --tag build01497 --online && cd -
+        sdk install java 8.0.402-tem && cd ./scripts && ./verify-build --tag build01498 --online && cd -
         ./stop-node.sh
 
   windows-installer:
@@ -53,7 +53,7 @@ jobs:
       shell: bash
       run: |
         cd ./wininstaller-innosetup
-        curl "https://github.com/freenet/fred/releases/download/build01497/freenet-build01497.jar" > freenet.jar
+        curl "https://github.com/freenet/fred/releases/download/build01498/freenet-build01498.jar" > freenet.jar
         ./gradlew unzip updateSetupFile
 
     - name: build the windows installer
