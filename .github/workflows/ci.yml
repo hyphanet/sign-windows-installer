@@ -69,3 +69,21 @@ jobs:
       with:
         path: "wininstaller-innosetup/Output/FreenetInstaller.exe"
         name: wininstaller-innosetup
+
+    - name: sign the windows installer
+      uses: SignPath/github-action-submit-signing-request@v0.4
+      id: sign-installer
+      with:
+        api-token: '${{ secrets.SIGNPATHTOKEN }}'
+        organization-id: 'hyphanet'
+        project-slug: 'sign-windows-installer'
+        signing-policy-slug: 'test-signing'
+        github-artifact-id: '${{ steps.upload-artifact.outputs.artifact-id }}'
+        output-artifact-directory: 'wininstaller-innosetup/Output'
+
+    - name: Upload the signed windows installer as an artifact
+      uses: actions/upload-artifact@v4
+      if: ${{ github.event_name != 'pull_request' }}
+      with:
+        path: "wininstaller-innosetup/Output/FreenetInstaller-signed.exe"
+        name: wininstaller-innosetup
