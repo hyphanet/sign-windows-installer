@@ -12,9 +12,9 @@ CI check the build.
 
 ## Submodules
 
-- fred: the Hyphanet fred sources
-- scripts: the release scripts with verify-build
-- wininstaller-innosetup: the windows installer
+- fred: the Hyphanet fred sources https://github.com/hyphanet/fred
+- scripts: the release scripts with verify-build https://github.com/hyphanet/scripts
+- wininstaller-innosetup: the windows installer https://github.com/hyphanet/wininstaller-innosetup
 
 ## Verification Process
 
