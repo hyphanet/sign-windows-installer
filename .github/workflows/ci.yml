@@ -78,6 +78,7 @@ jobs:
         organization-id: 'hyphanet'
         project-slug: 'sign-windows-installer'
         signing-policy-slug: 'test-signing'
+        connector-url: https://app.signpath.io/Api/v1/hyphanet
         github-artifact-id: '${{ steps.upload-artifact.outputs.artifact-id }}'
         output-artifact-directory: 'wininstaller-innosetup/Output'
 
