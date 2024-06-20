@@ -33,6 +33,7 @@ jobs:
 
   windows-installer:
     runs-on: windows-latest
+    needs: verify-fred
 
     steps:
     - name: Checkout
