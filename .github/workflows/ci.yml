@@ -79,11 +79,11 @@ jobs:
         project-slug: 'sign-windows-installer'
         signing-policy-slug: 'test-signing'
         github-artifact-id: '${{ steps.upload-artifact.outputs.artifact-id }}'
-        output-artifact-directory: 'wininstaller-innosetup/Output'
+        output-artifact-directory: 'wininstaller-innosetup/OutputSigned'
 
     - name: Upload the signed windows installer as an artifact
       uses: actions/upload-artifact@v4
       if: ${{ github.event_name != 'pull_request' }}
       with:
-        path: "wininstaller-innosetup/Output/FreenetInstaller-signed.exe"
-        name: wininstaller-innosetup
+        path: "wininstaller-innosetup/OutputSigned/FreenetInstaller.exe"
+        name: wininstaller-innosetup-signed
