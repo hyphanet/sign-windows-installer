@@ -10,6 +10,11 @@ The functionality is in .github/... and scripts/verify-build
 To run a release, update the submodules to the release tag and let the
 CI check the build.
 
+Free code signing is provided by
+[SignPath.io](https://about.signpath.io/?), the certificate by the
+[SignPath Foundation](https://signpath.org/).
+
+
 ## Submodules
 
 - fred: the Hyphanet fred sources https://github.com/hyphanet/fred
