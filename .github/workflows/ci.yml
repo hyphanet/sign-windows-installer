@@ -28,11 +28,12 @@ jobs:
         cat ~/Freenet/wrapper.log
         echo "update JAVA_HOME environment variable"; source /etc/environment; source /etc/profile; export JAVA_HOME=/usr/lib/jvm/temurin-8-jdk-amd64
         echo "install sdkman"; curl -s "https://get.sdkman.io" | bash; source "/home/runner/.sdkman/bin/sdkman-init.sh"
-        sdk install java 8.0.402-tem && cd ./scripts && ./verify-build --tag build01497 --online && cd -
+        sdk install java 8.0.402-tem && cd ./scripts && ./verify-build --tag build01498 --online && cd -
         ./stop-node.sh
 
   windows-installer:
     runs-on: windows-latest
+    needs: verify-fred
 
     steps:
     - name: Checkout
@@ -46,6 +47,7 @@ jobs:
       with:
         repository: 'hyphanet/fred'
         fetch-depth: 0
+        ref: 'build01498'
         path: 'wininstaller-innosetup/fred'
 
 
@@ -53,7 +55,7 @@ jobs:
       shell: bash
       run: |
         cd ./wininstaller-innosetup
-        curl "https://github.com/freenet/fred/releases/download/build01497/freenet-build01497.jar" > freenet.jar
+        curl "https://github.com/freenet/fred/releases/download/build01498/freenet-build01498.jar" > freenet.jar
         ./gradlew unzip updateSetupFile
 
     - name: build the windows installer
@@ -63,8 +65,27 @@ jobs:
         "%programfiles(x86)%\Inno Setup 6\iscc.exe" "FreenetInstall_InnoSetup.iss"
         
     - name: Upload the windows installer as an artifact
+      id: upload-artifact
       uses: actions/upload-artifact@v4
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "wininstaller-innosetup/Output/FreenetInstaller.exe"
         name: wininstaller-innosetup
+
+    - name: sign the windows installer
+      uses: SignPath/github-action-submit-signing-request@v0.4
+      id: sign-installer
+      with:
+        api-token: '${{ secrets.SIGNPATHTOKEN }}'
+        organization-id: '1a5f43b2-f4e4-4ce5-888d-7c6277131a02'
+        project-slug: 'sign-windows-installer'
+        signing-policy-slug: 'release-signing'
+        github-artifact-id: '${{ steps.upload-artifact.outputs.artifact-id }}'
+        output-artifact-directory: 'wininstaller-innosetup/OutputSigned'
+
+    - name: Upload the signed windows installer as an artifact
+      uses: actions/upload-artifact@v4
+      if: ${{ github.event_name != 'pull_request' }}
+      with:
+        path: "wininstaller-innosetup/OutputSigned/FreenetInstaller.exe"
+        name: wininstaller-innosetup-signed
