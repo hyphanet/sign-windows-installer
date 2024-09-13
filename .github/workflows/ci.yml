@@ -50,11 +50,12 @@ jobs:
         ref: 'build01498'
         path: 'wininstaller-innosetup/fred'
 
+    - name: Install wget
+      run: sudo apt-get install -y wget
 
     - name: prepare the windows installer
       shell: bash
       run: |
-        apt-get install wget
         cd ./wininstaller-innosetup
         wget -O freenet.jar "https://github.com/freenet/fred/releases/download/build01498/freenet-build01498.jar"
         ./gradlew unzip updateSetupFile
