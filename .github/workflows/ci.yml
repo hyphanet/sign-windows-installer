@@ -54,8 +54,9 @@ jobs:
     - name: prepare the windows installer
       shell: bash
       run: |
+        apt-get install wget
         cd ./wininstaller-innosetup
-        curl "https://github.com/freenet/fred/releases/download/build01498/freenet-build01498.jar" > freenet.jar
+        wget -O freenet.jar "https://github.com/freenet/fred/releases/download/build01498/freenet-build01498.jar"
         ./gradlew unzip updateSetupFile
 
     - name: build the windows installer
