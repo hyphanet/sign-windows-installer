@@ -28,7 +28,7 @@ jobs:
         cat ~/Freenet/wrapper.log
         echo "update JAVA_HOME environment variable"; source /etc/environment; source /etc/profile; export JAVA_HOME=/usr/lib/jvm/temurin-8-jdk-amd64
         echo "install sdkman"; curl -s "https://get.sdkman.io" | bash; source "/home/runner/.sdkman/bin/sdkman-init.sh"
-        sdk install java 8.0.402-tem && cd ./scripts && ./verify-build --tag build01499 --online && cd -
+        sdk install java 8.0.402-tem && cd ./scripts && ./verify-build --tag build01500 --online && cd -
         ./stop-node.sh
 
   windows-installer:
@@ -47,14 +47,14 @@ jobs:
       with:
         repository: 'hyphanet/fred'
         fetch-depth: 0
-        ref: 'build01499'
+        ref: 'build01500'
         path: 'wininstaller-innosetup/fred'
 
     - name: prepare the windows installer
       shell: bash
       run: |
         cd ./wininstaller-innosetup
-        curl --location "https://github.com/freenet/fred/releases/download/build01499/freenet-build01499.jar" > freenet.jar
+        curl --location "https://github.com/freenet/fred/releases/download/build01500/freenet-build01500.jar" > freenet.jar
         ./gradlew unzip updateSetupFile
 
     - name: build the windows installer
