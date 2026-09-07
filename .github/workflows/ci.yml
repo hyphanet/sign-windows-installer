@@ -83,6 +83,7 @@ jobs:
         signing-policy-slug: 'release-signing'
         github-artifact-id: '${{ steps.upload-artifact.outputs.artifact-id }}'
         output-artifact-directory: 'wininstaller-innosetup/OutputSigned'
+        skip-decompress: true
 
     - name: Upload the signed windows installer as an artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
