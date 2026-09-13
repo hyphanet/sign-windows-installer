@@ -70,7 +70,6 @@ jobs:
       with:
         path: "wininstaller-innosetup/Output/FreenetInstaller.exe"
         name: wininstaller-innosetup
-        archive: false
 
     - name: sign the windows installer
       uses: SignPath/github-action-submit-signing-request@c92b958760219087e01f8d67a1669ed57afe2627 # v2
